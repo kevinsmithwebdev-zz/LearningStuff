@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <title>Angular with kudvenkat</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <script src="js/angular.min.js"></script>
+  <script src="js/script.js"></script>
+</head>
+
+<body ng-app = "myModule">
+  <div ng-controller = "myController">
+    <table>
+      <thead>
+        <tr>
+          <th ng-click = "sortData('name')">
+            Name <div ng-class = getSortClass('name')></div>
+          </th>
+          <th ng-click = "sortData('dateOfBirth')">
+            Date of Birth <div ng-class = getSortClass('dateOfBirth')></div>
+          </th>
+          <th ng-click = "sortData('gender')">
+            Gender <div ng-class = getSortClass('gender')></div>
+          </th>
+          <th ng-click = "sortData('salary')">
+            Salary <div ng-class = getSortClass('salary')></div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="employee in employees | orderBy:sortColumn:reverseSort">
+          <td>{{ employee.name | uppercase }}</td>
+          <td>{{ employee.dateOfBirth | date:'dd-MMM-yy'}}</td>
+          <td>{{ employee.gender }}</td>
+          <td>{{ employee.salary | number:0 }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
