@@ -1,0 +1,29 @@
+<html>
+<head>
+  <title>Learning D3 with BT</title>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <style>
+    .big {
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <ul class="items">
+    <li>This is an item.</li>
+    <li>This is an item.</li>
+    <li>This is an item.</li>
+    <li>This is an item.</li>
+    <li>This is an item.</li>
+    <li>This is an item.</li>
+  </ul>
+
+  <script>
+    d3.selectAll('li:nth-child(even)')
+        .style('color', 'red')
+        .html('This is an even number.')
+        .classed('big', true);
+  </script>
+
+</body>
+</html>

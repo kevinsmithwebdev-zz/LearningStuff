@@ -1,0 +1,38 @@
+<html>
+<head>
+  <title>Learning D3 with BT</title>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <style>
+
+  </style>
+</head>
+<body>
+  <ul class="items">
+    <li>This is an item.</li>
+    <li>This is an item.</li>
+    <li>This is an item.</li>
+    <li>This is an item.</li>
+    <li>This is an item.</li>
+
+  </ul>
+
+  <script>
+    var numArray = [12, 20, 33, 40, 55];
+
+    d3.selectAll('.items li')
+        .data(numArray)
+        .text(function(d) {
+          return 'This is item number ' + d;
+        });
+
+    // d3.selectAll('.items li')
+    //     .data(numArray)
+    //     .style('font-size', function(d) {
+    //       return d+'px';
+    //     });
+
+
+  </script>
+
+</body>
+</html>
