@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello Handlebars</title>
+  <script src="handlebars-v4.0.10.js"></script>
+</head>
+<body>
+
+  <div id="contentDiv"></div>
+
+  <script id='the-template' type="text/x-handlebars-template">
+
+    {{> myName}}
+    <div class="post">
+      {{> askQuestion tagName="h2"}}
+      <h2>Suggestions</h2>
+      {{#each comments}}
+        {{> askQuestion tagName="h3"}}
+      {{/each}}
+    </div>
+
+  </script>
+
+
+  <script type='text/javascript'>
+    var templateInfo = document.getElementById('the-template').innerHTML;
+    var template = Handlebars.compile(templateInfo);
+
+    Handlebars.registerPartial("myName", '{{name}}');
+
+    Handlebars.registerPartial("askQuestion", '<{{tagName}}>{{author}}</{{tagName}}>' + '<div class="comment">{{comment}}</div>');
+
+    var templateData = template({
+      name: "Derek",
+      author: "John Smith",
+      comment: "Where should we vacation?",
+      comments: [{
+        author: "Sue Smith",
+        comment: "the beach"
+      },
+      {
+        author: "Paul Smith",
+        comment: "Disneyland, dude!"
+      }]
+    });
+
+    document.getElementById('contentDiv').innerHTML += templateData;
+  </script>
+
+</body>
+</html>

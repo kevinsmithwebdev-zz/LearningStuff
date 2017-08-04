@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello Handlebars</title>
+  <script src="handlebars-v4.0.10.js"></script>
+</head>
+<body>
+
+  <div id="contentDiv"></div>
+
+
+
+
+
+  <script id='the-template' type="text/x-handlebars-template">
+    {{#makeRadio "size"}}
+      Small
+      Medium
+      Large
+    {{/makeRadio}}
+
+    <br><br>
+
+    {{#areEqual 1 2}}
+      Numbers are equal
+    {{else}}
+      Numbers are not equal
+    {{/areEqual}}
+
+    <br><br>
+
+    {{#if "isActive"}}
+      <img src="https://body-square.com/wp-content/uploads/2017/07/runner-2.jpg" alt="active">
+    {{else}}
+      <img src="http://i.dailymail.co.uk/i/pix/2012/08/15/article-2188482-148CB390000005DC-582_468x312.jpg" alt="inactive">
+    {{/if}}
+
+  </script>
+
+
+  <script type='text/javascript'>
+    var templateInfo = document.getElementById('the-template').innerHTML;
+
+    var template = Handlebars.compile(templateInfo);
+
+    Handlebars.registerHelper('makeRadio', function(name, options) {
+      var radioList = options.fn();
+
+      radioList = radioList.trim().split('\n');
+      var output = '';
+
+      for (var val in radioList) {
+        var item  = radioList[val].trim();
+        output += '<input type="radio" name="' + name + '"value="' + item + '">' + item + '<br />';
+      }
+
+      return output;
+    });
+
+    Handlebars.registerHelper("areEqual", function(num1, num2, options) {
+      if (num1===num2)
+        return options.fn(this);
+      else
+        return options.inverse(this);
+
+    });
+
+    Handlebars.registerHelper("if", function(data, options) {
+      if (data === "isActive") {
+        return options.fn(this);
+      } else {
+        return options.inverse(this);
+      }
+    });
+
+
+    var templateData = template({});
+
+    document.getElementById('contentDiv').innerHTML += templateData;
+
+  </script>
+
+</body>
+</html>
